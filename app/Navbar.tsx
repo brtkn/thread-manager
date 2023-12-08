@@ -1,12 +1,17 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaBugSlash } from "react-icons/fa6";
+import classNames from "classnames";
 
 const links = [
-  { label: "Dashboard", href: "/dashboard" },
+  { label: "Dashboard", href: "/" },
   { label: "Issues Page", href: "/issues" },
 ];
 
 const Navbar = () => {
+  const currentPath = usePathname();
+
   return (
     <nav className="flex px-4 h-16 border-b-2 border-gray-800 items-center">
       <Link href="/">
@@ -17,7 +22,11 @@ const Navbar = () => {
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-gray-400 hover:text-gray-900 transition-colors text-lg"
+              className={classNames({
+                "text-zinc-900": link.href === currentPath,
+                "text-zinc-500": link.href !== currentPath,
+                "hover:text-zinc-800 transition-colors text-lg": true,
+              })}
             >
               {link.label}
             </Link>
