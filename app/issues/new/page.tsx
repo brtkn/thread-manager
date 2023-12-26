@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchema";
 import { z } from "zod";
 import { Text } from "@radix-ui/themes";
+import ErrorMessage from "@/app/component/ErrorMessage";
 
 // we are gonna use zod type for this
 /* interface IssueForm {
@@ -52,11 +53,7 @@ const NewIssue = () => {
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register("title")} />
         </TextField.Root>
-        {errors.title && (
-          <Text color="red" as="p">
-            {errors.title.message}
-          </Text>
-        )}
+        {<ErrorMessage>{errors.title?.message}</ErrorMessage>}
         <Controller
           name="description"
           control={control}
@@ -64,11 +61,7 @@ const NewIssue = () => {
             <SimpleMdeReact placeholder="Description" {...field} />
           )}
         />
-        {errors.description && (
-          <Text as="p" color="red">
-            {errors.description.message}
-          </Text>
-        )}
+        {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button>Submit New Issue</Button>
       </form>
     </div>
