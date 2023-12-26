@@ -10,7 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchema";
 import { z } from "zod";
 import { Text } from "@radix-ui/themes";
-import ErrorMessage from "@/app/component/ErrorMessage";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
 
 // we are gonna use zod type for this
 /* interface IssueForm {
@@ -19,6 +20,7 @@ import ErrorMessage from "@/app/component/ErrorMessage";
 } */
 
 const NewIssue = () => {
+  const [isSubmitting, setSubmitting] = useState(false);
   //When we change the schema isssueFrom will also change.
   type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -44,8 +46,10 @@ const NewIssue = () => {
         className="space-y-3"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setSubmitting(true);
             await axios.post("/api/issues", data), router.push("/issues");
           } catch (error) {
+            setSubmitting(false);
             setError("An unexpected error occurred");
           }
         })}
@@ -62,7 +66,9 @@ const NewIssue = () => {
           )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
