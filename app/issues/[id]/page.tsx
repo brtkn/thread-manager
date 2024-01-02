@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import delay from "delay";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import ReactMarkdown from "react-markdown";
 interface Props {
   params: { id: string };
 }
@@ -17,14 +18,16 @@ const IssueDetailPage = async ({ params }: Props) => {
 
   return (
     <div>
-      <Heading mb="3">{issue.title}</Heading>
+      <Heading mb="5">{issue.title}</Heading>
       <Flex gap="3" mb="4">
         <IssueStatusBadge status={issue.status} />
         <Text>
           <p>{issue.createdAt.toDateString()}</p>
         </Text>
       </Flex>
-      <Card>{issue.description}</Card>
+      <Card className="prose" mt="4">
+        <ReactMarkdown>{issue.description}</ReactMarkdown>
+      </Card>
     </div>
   );
 };
