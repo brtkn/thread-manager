@@ -2,7 +2,6 @@
 import "easymde/dist/easymde.min.css";
 import { Button, Callout, TextArea, TextField } from "@radix-ui/themes";
 import React, { useState } from "react";
-import SimpleMdeReact from "react-simplemde-editor";
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -12,12 +11,17 @@ import { z } from "zod";
 import { Text } from "@radix-ui/themes";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import dynamic from "next/dynamic";
 
 // we are gonna use zod type for this
 /* interface IssueForm {
   title: string;
   description: string;
 } */
+
+const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 
 const NewIssue = () => {
   const [isSubmitting, setSubmitting] = useState(false);
