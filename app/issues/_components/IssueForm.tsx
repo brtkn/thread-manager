@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/validationSchema";
+import { IssueSchema } from "@/app/validationSchema";
 import { z } from "zod";
 import { Text } from "@radix-ui/themes";
 import ErrorMessage from "@/app/components/ErrorMessage";
@@ -25,7 +25,7 @@ interface Props {
 const IssueForm = ({ issue }: Props) => {
   const [isSubmitting, setSubmitting] = useState(false);
   //When we change the schema isssueFrom will also change.
-  type IssueFormData = z.infer<typeof createIssueSchema>;
+  type IssueFormData = z.infer<typeof IssueSchema>;
 
   const {
     register,
@@ -33,7 +33,7 @@ const IssueForm = ({ issue }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(IssueSchema),
   });
   const router = useRouter();
   const [error, setError] = useState("");
