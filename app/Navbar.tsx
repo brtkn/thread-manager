@@ -6,7 +6,7 @@ import classNames from "classnames";
 
 const links = [
   { label: "Dashboard", href: "/" },
-  { label: "Issues Page", href: "/issues" },
+  { label: "Issues Page", href: "/issues/list" },
 ];
 
 const Navbar = () => {
