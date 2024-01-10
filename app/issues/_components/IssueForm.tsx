@@ -13,10 +13,11 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import dynamic from "next/dynamic";
 import { Issue } from "@prisma/client";
+import SimpleMdeReact from "react-simplemde-editor";
 
-const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+// const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
+//   ssr: false,
+// });
 
 interface Props {
   issue?: Issue;
