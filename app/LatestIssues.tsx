@@ -7,7 +7,7 @@ import { userAgent } from "next/server";
 const LatestIssues = async () => {
   const issues = await prisma.issue.findMany({
     orderBy: { createdAt: "desc" },
-    take: 10,
+    take: 5,
     include: { assignedToUser: true },
   });
 
